@@ -37,11 +37,11 @@ CREATE TABLE TipoOperacion (
     tipo_operacion VARCHAR(20)
 );
 
--- Crear tabla "CategoriaVehiculo"
-CREATE TABLE CategoriaVehiculo (
-    codigo_categoria_vehiculo SERIAL PRIMARY KEY,
-    categoria_vehiculo VARCHAR(20)
+CREATE TABLE Categorias(
+    codigo_categoria SERIAL PRIMARY KEY,
+    categoria VARCHAR(20)
 );
+
 
 -- Crear tabla "Corredores"
 CREATE TABLE Corredores (
@@ -82,14 +82,14 @@ CREATE TABLE Lecturas (
     codigo_tipo_sub_sistema INT,
     codigo_tipo_operacion INT,
     codigo_comuna INT,
-    fecha DATE,
+    fecha VARCHAR(100),
     ano NUMERIC(4),
-    hora TIME,
+    hora INT,
     velocidad_km_h INT,
     intensidad INT,
     ocupacion INT,
-    longitud DECIMAL(9,6),
-    latitud DECIMAL(8,6),
+    longitud VARCHAR(20),
+    latitud VARCHAR(20),
     identificador_f_v BOOLEAN,
     FOREIGN KEY (codigo_dia) REFERENCES Dias(codigo_dia),
     FOREIGN KEY (codigo_mes) REFERENCES Meses(codigo_mes),
@@ -101,12 +101,12 @@ CREATE TABLE Lecturas (
     FOREIGN KEY (codigo_carril) REFERENCES Carriles(codigo_carril)
 );
 
--- Crear tabla "LecturasCategoriaVehiculo"
-CREATE TABLE LecturasCategoriaVehiculo (
-    codigo_lectura_categoria_vehiculo SERIAL PRIMARY KEY,
+-- Crear tabla "LecturasCategoria"
+CREATE TABLE LecturasCategoria (
+    codigo_lectura_categoria SERIAL PRIMARY KEY,
     codigo_lectura INT,
-    codigo_categoria_vehiculo INT,
+    codigo_categoria INT,
     cantidad INT,
     FOREIGN KEY (codigo_lectura) REFERENCES Lecturas(codigo_lectura),
-    FOREIGN KEY (codigo_categoria_vehiculo) REFERENCES CategoriaVehiculo(codigo_categoria_vehiculo)
+    FOREIGN KEY (codigo_categoria) REFERENCES Categorias(codigo_categoria)
 );
